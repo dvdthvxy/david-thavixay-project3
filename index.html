@@ -1,12 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>Jungle Run</title>
 </head>
+
 <body>
-    
+    <main>
+        <div class="wrapper visibility">
+            <!-- start button -->
+            <button>
+                <div>START</div>
+            </button>
+
+            <!-- game text -->
+            <p class="countdown visibility" id="countdown">Press Start to begin</p>
+            <p class="yourTime">Your time is:</p>
+            <h2 class="timer">Alternate pressing the left and right arrow keys to get your character to run. Make him
+                run 100m as fast as you can!</h2>
+
+            <!-- image of runner -->
+            <div class="runner">
+                <img src="assets/images/Idle__000.png" alt="">
+            </div>
+        </div>
+    </main>
+
+    <audio src="assets/sounds/Mario Kart Race Start - Gaming Sound Effect.mp3"></audio>
+
+    <script src='https://code.jquery.com/jquery-3.2.1.min.js'
+        integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>
