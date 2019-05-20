@@ -144,3 +144,97 @@ legend, button::-moz-focus-inner, input::-moz-focus-inner {
   clip-path: inset(100%);
   clip: rect(0 0 0);
   overflow: hidden; }
+
+h1,
+h2,
+p,
+button {
+  margin: 0;
+  color: aliceblue;
+  font-size: 1.5rem;
+  font-family: 'Stylish', sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+h1 {
+  font-size: 8rem; }
+
+img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain; }
+
+button {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  position: relative;
+  background: firebrick; }
+
+main,
+.wrapper,
+.title-screen {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+
+main {
+  width: auto;
+  height: 100vh;
+  background-image: url(../assets/images/background.png);
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: repeat-x; }
+
+.wrapper {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+
+.timer {
+  text-align: center; }
+
+.runner {
+  width: 80%;
+  height: 50vh; }
+
+.countdown {
+  font-size: 1.25rem;
+  -webkit-transition: all .5s ease-in;
+  -o-transition: all .5s ease-in;
+  transition: all .5s ease-in; }
+
+.font-expand {
+  font-size: 4rem; }
+
+.visibility {
+  visibility: hidden; }
+
+.yourTime {
+  display: none; }
+
+.title-screen {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(35, 41, 44, 0.7);
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center; }

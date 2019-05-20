@@ -1,1 +1,85 @@
 @import 'setup';
+
+// main styles
+h1,
+h2,
+p,
+button {
+    margin: 0;
+    color: aliceblue;
+    font-size: 1.5rem;
+    font-family: 'Stylish', sans-serif;
+    user-select: none;
+}
+
+h1 {
+    font-size: 8rem;
+}
+
+img {
+    @include width-height(100%, 100%);
+    object-fit: contain;
+}
+
+button {
+    @include width-height(110px, 110px);
+    border-radius: 50%;
+    position: relative;
+    background: firebrick;
+}
+
+main,
+.wrapper,
+.title-screen {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    @include width-height(auto, 100vh);
+    background-image: url(../assets/images/background.png);
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: repeat-x;
+}
+
+.wrapper {
+    @include width-height(80%, 100%);
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.timer {
+    text-align: center;
+}
+
+.runner {
+    @include width-height(80%, 50vh);
+}
+
+
+.countdown {
+    font-size: 1.25rem;
+    transition: all .5s ease-in;
+}
+
+.font-expand {
+    font-size: 4rem;
+}
+
+.visibility {
+    visibility: hidden;
+}
+
+.yourTime {
+    display: none;
+}
+
+.title-screen {
+    position: absolute;
+    @include overlayPosition(0);
+    background: rgba(35, 41, 44, 0.7);
+    align-items: center;
+    justify-content: center;
+}
