@@ -50,6 +50,7 @@ main {
     justify-content: space-around;
 }
 
+h1,
 .timer {
     text-align: center;
 }
@@ -57,7 +58,6 @@ main {
 .runner {
     @include width-height(80%, 50vh);
 }
-
 
 .countdown {
     font-size: 1.25rem;
@@ -82,4 +82,10 @@ main {
     background: rgba(35, 41, 44, 0.7);
     align-items: center;
     justify-content: center;
+}
+
+@media (max-width: 700px) {
+    h1 {
+        font-size: 4rem;
+    }
 }

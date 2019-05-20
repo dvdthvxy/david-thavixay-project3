@@ -203,6 +203,7 @@ main {
   -ms-flex-pack: distribute;
   justify-content: space-around; }
 
+h1,
 .timer {
   text-align: center; }
 
@@ -238,3 +239,7 @@ main {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center; }
+
+@media (max-width: 700px) {
+  h1 {
+    font-size: 4rem; } }
