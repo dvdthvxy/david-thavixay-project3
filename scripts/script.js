@@ -4,7 +4,34 @@ let countdown = undefined; //var represents the countdown number
 
 //event listener for when the user presses a key
 function running() {
-    
+    let animationCount = 0; //var keeps track of the character's animation frame
+    let keyPressed = undefined; //var keeps track of the user's last key press
+
+    //event listener for key press created
+    $(window).keydown(function (e) {
+
+        //checks the user's key press - the key press cannot be the last user's last key pressed and it has to be either the left or right arrow key
+        if (e.keyCode !== keyPressed && (e.keyCode == 37 || e.keyCode == 39)) {
+            runCounter++; //increase run counter by 1
+
+            //checks what frame the character animation is at
+            //if the character animation reaches it's 9th frame, the counter resets back to 0 and the animation begins again
+            if (animationCount > 9) {
+                animationCount = 0; //reset animation counter to 0
+                $('img').attr('src', `assets/images/Run__00${animationCount}.png`); //change the character animation
+                animationCount++; //increase animation counter by 1
+            }
+
+            //show the next frame of the character animation and increase the animation counter by 1
+            else {
+                $('img').attr('src', `assets/images/Run__00${animationCount}.png`);
+                animationCount++;
+            }
+        }
+
+        $('main').css('background-position-x', `${runCounter * -50}px`); //move the background 
+        keyPressed = e.keyCode //record the key press
+    });
 }
 
 //function to create the timer
