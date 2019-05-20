@@ -36,7 +36,16 @@ function running() {
 
 //function to create the timer
 function stopWatch() {
+    const startTime = new Date; //var represents the timestamp of when the game started
 
+    //creates a loop
+    return setInterval(function () {
+        //formula calculates the timer
+        //(time of when new Date created - game start time) / 1000
+        //we divied by 1000 to return the time in seconds and then provide the next 3 decimal places with toFixed
+        //the result is then shown on the screen.
+        $('.timer').text(((new Date - startTime) / 1000).toFixed(3) + "s");
+    });
 }
 
 //function to stop the intervals
