@@ -61,12 +61,24 @@ function removeTransition(e) {
 
 //function checks the countdown timer
 function readySetGo() {
+    //if the countdown is 0, display GO instead of 0
+    if (countdown === 0) {
+        $('.countdown').text('GO')
+        $('.countdown').addClass('font-expand');
 
+    }
+    //display the number of countdown and then decrease it
+    else {
+        $('.countdown').text(countdown);
+        $('.countdown').addClass('font-expand');
+        countdown--;
+    }
 }
 
 //function plays the audio
 function playSound() {
-
+    const audio = document.querySelector('audio'); //get the audio source
+    audio.play(); //play audio
 }
 
 //function resets the styles and counters
