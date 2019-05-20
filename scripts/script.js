@@ -83,22 +83,56 @@ function playSound() {
 
 //function resets the styles and counters
 function resetGame() {
-
+    $('button').toggleClass('visibility');
+    $('.timer').toggleClass('visibility');
+    $('.runner').css('visibility', 'hidden');
+    $('.countdown').toggleClass('visibility');
+    $('.yourTime').css('display', 'none');
+    runCounter = 0;
+    countdown = 3;
 }
 
 //function turns on game's active styles
 function gameStyles() {
-
+    $('.countdown').toggleClass('visibility');
+    $('.timer').css('font-size', '3rem');
+    $('.runner').css('visibility', 'visible');
+    $('.timer').toggleClass('visibility');
 }
 
 //function turns on end of game styles
 function endGame() {
-
+    $(window).off('keydown'); //turn off keydown event listener
+    $('button').toggleClass('visibility');
+    $('button').text('Retry');
+    $('img').attr('src', `assets/images/Dead__009.png`);
+    $('.yourTime').css('display', 'block');
 }
 
 //function starts the game
 function startGame() {
+    playSound(); //play the countdown music
+    resetGame() //reset the styles and counters
+    readySetGo(); //start intial countdown
+    let beginCountdown = setInterval(readySetGo, 1001); //run countdown again for every second
 
+    //delay start of game by 3.5secs
+    setTimeout(function () {
+        gameStyles(); //turn on game active styles
+        stop(beginCountdown); //stop countdown
+        running(); //turn on keydown event listener
+        let timer = stopWatch(); //create timer
+
+        //function continously checks runCounter every 10th of a second
+        let watcher = setInterval(function () {
+            //end game when runCounter is 100
+            if (runCounter === 100) {
+                stop(timer);
+                endGame();
+                stop(watcher);
+            }
+        }, 10);
+    }, 3500);
 }
 
 //document ready
@@ -109,11 +143,12 @@ $(function () {
 
     //listens for when user clicks on the overlay
     $('.title-screen').on('click', function () {
-
+        $('.wrapper').toggleClass('visibility');
+        $('.title-screen').css('display', 'none');
     });
 
     //start game when button clicked
     $('button').on('click', function () {
-
+        startGame();
     });
 });
