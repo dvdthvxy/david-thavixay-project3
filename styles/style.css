@@ -159,7 +159,8 @@ button {
   user-select: none; }
 
 h1 {
-  font-size: 8rem; }
+  font-size: 8rem;
+  text-shadow: 10px 10px black; }
 
 img {
   width: 100%;
@@ -257,7 +258,8 @@ h1,
 
 @media (max-width: 700px) {
   h1 {
-    font-size: 4rem; } }
+    font-size: 4rem;
+    text-shadow: 5px 5px black; } }
 
 @media (max-width: 500px) {
   footer {

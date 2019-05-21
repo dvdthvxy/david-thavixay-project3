@@ -180,6 +180,7 @@ $(function () {
         startGame();
     });
 
+    //adjust text when user is on mobile
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         $('.timer').text('Tap on your character to run. Make him run 100m as fast as you can!');
     }
