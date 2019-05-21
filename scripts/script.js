@@ -111,7 +111,7 @@ function resetGame() {
     $('.timer').toggleClass('visibility');
     $('.runner').css('visibility', 'hidden');
     $('.countdown').toggleClass('visibility');
-    $('.yourTime').css('display', 'none');
+    $('.your-time').css('display', 'none');
     runCounter = 0;
     countdown = 3;
 }
@@ -133,7 +133,7 @@ function endGame() {
     $('button').toggleClass('visibility');
     $('button').text('Retry');
     $('img').attr('src', `assets/images/Dead__009.png`);
-    $('.yourTime').css('display', 'block');
+    $('.your-time').css('display', 'block');
 
 }
 

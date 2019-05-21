@@ -187,11 +187,26 @@ main,
 
 main {
   width: auto;
-  height: 100vh;
+  height: calc(100vh - 30px);
   background-image: url(../assets/images/background.png);
   background-size: cover;
   background-position: bottom;
   background-repeat: repeat-x; }
+
+footer {
+  height: 30px;
+  background: darkslategray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+  footer p {
+    font-size: 1rem; }
 
 .wrapper {
   width: 80%;
@@ -223,7 +238,7 @@ h1,
 .visibility {
   visibility: hidden; }
 
-.yourTime {
+.your-time {
   display: none; }
 
 .title-screen {
@@ -243,3 +258,9 @@ h1,
 @media (max-width: 700px) {
   h1 {
     font-size: 4rem; } }
+
+@media (max-width: 500px) {
+  footer {
+    display: none; }
+  main {
+    height: 100vh; } }

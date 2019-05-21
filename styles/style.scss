@@ -36,11 +36,22 @@ main,
 }
 
 main {
-    @include width-height(auto, 100vh);
+    @include width-height(auto, calc(100vh - 30px));
     background-image: url(../assets/images/background.png);
     background-size: cover;
     background-position: bottom;
     background-repeat: repeat-x;
+}
+
+footer {
+    height: 30px;
+    background: darkslategray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+        font-size: 1rem;
+    }
 }
 
 .wrapper {
@@ -72,7 +83,7 @@ h1,
     visibility: hidden;
 }
 
-.yourTime {
+.your-time {
     display: none;
 }
 
@@ -84,8 +95,19 @@ h1,
     justify-content: center;
 }
 
+//mobile styles
 @media (max-width: 700px) {
     h1 {
         font-size: 4rem;
+    }
+}
+
+@media (max-width: 500px) {
+    footer {
+        display: none;
+    }
+
+    main {
+        height: 100vh;
     }
 }
