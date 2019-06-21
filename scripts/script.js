@@ -1,5 +1,6 @@
 let runCounter = undefined; //var keeps track of user's unput
 let countdown = undefined; //var represents the countdown number
+let finalTime = undefined;
 
 
 // Your web app's Firebase configuration
@@ -143,6 +144,7 @@ function resetGame() {
     $('.countdown').toggleClass('visibility');
     $('.your-time').css('display', 'none');
     $('.submitTime').css('display', 'none');
+    $('.runner').css('width', `250px`)
     runCounter = 0;
     countdown = 3;
 }
@@ -163,9 +165,12 @@ function endGame() {
     }
     $('.startButton').toggleClass('visibility');
     $('.startButton').text('Retry');
-    $('img').attr('src', `assets/images/Dead__009.png`);
+    $('.runner').css('background-image', `url("assets/images/Dead (14).png")`);
+    $('.runner').css('width', `300px`);
+    $('.runner').css('background-position-y', `0`);
     $('.your-time').css('display', 'block');
     $('.submitTime').css('display', 'block');
+    finalTime = parseFloat($('.timer').text().replace('s', ''))
 }
 
 //function starts the game
@@ -195,11 +200,17 @@ function startGame() {
 }
 
 function submitTime() {
+    
     if (/^\s*$/.test($('.username').val()) === false) {
+        swal("Your score has been submitted!")
+        $('.submitTime').css('display', 'none');
         const dbRef = firebase.database().ref('users');
         dbRef.update({
-            [$('.username').val()]: parseFloat($('.timer').text().replace('s', ''))
+            // [$('.username').val()]: parseFloat($('.timer').text().replace('s', ''))
+            [$('.username').val()]: finalTime
         })
+    } else {
+        swal("You need to enter your name.")
     }
 }
 
@@ -227,6 +238,6 @@ $(function () {
 
     //adjust text when user is on mobile
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $('.timer').text('Tap on your character to run. Make him run 100m as fast as you can!');
+        $('.timer').text(`You're running late for class! Tap on your character to run. Make him run as fast as you can!`);
     }
 });
