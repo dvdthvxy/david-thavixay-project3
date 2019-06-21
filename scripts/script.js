@@ -1,11 +1,42 @@
 let runCounter = undefined; //var keeps track of user's unput
 let countdown = undefined; //var represents the countdown number
+let finalTime = undefined;
+
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyANq1B-nx6WnigunSw2zSabHm_4cab_DEY",
+    authDomain: "running-game-6160a.firebaseapp.com",
+    databaseURL: "https://running-game-6160a.firebaseio.com",
+    projectId: "running-game-6160a",
+    storageBucket: "",
+    messagingSenderId: "768778734360",
+    appId: "1:768778734360:web:0bfe360dd3119a1b"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const dbRef = firebase.database().ref('users')
+dbRef.orderByValue().on("value", function (response) {
+    $('.scores').empty()
+
+    let leaderboardLimit = 0
+    response.forEach( data => {
+        leaderboardLimit++
+        if (leaderboardLimit > 5) {
+            return
+        } else {
+            $('.scores').append(`<div>${data.key} : ${data.val()}</div>`)
+        }
+    });
+});
 
 
 //event listener for when the user presses a key
 function running() {
     let animationCount = 0; //var keeps track of the character's animation frame
     let keyPressed = undefined; //var keeps track of the user's last key press
+    $('.runner').css('background-image', `url("assets/images/Running-boy.png")`);
 
     //checks if the user is on a mobile device, enables user to tap on the character. IF statement from stackoverflow.
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -13,17 +44,17 @@ function running() {
             runCounter++; //increase run counter by 1
 
             //checks what frame the character animation is at
-            //if the character animation reaches it's 9th frame, the counter resets back to 0 and the animation begins again
-            if (animationCount > 9) {
+            //if the character animation reaches it's 15th frame, the counter resets back to 0 and the animation begins again
+            if (animationCount < -3850) {
                 animationCount = 0; //reset animation counter to 0
-                $('img').attr('src', `assets/images/Run__00${animationCount}.png`); //change the character animation
-                animationCount++; //increase animation counter by 1
+                $('.runner').css('background-position-y', animationCount);
+                animationCount -= 275; //increase animation frame by 1
             }
 
-            //show the next frame of the character animation and increase the animation counter by 1
+            //show the next frame of the character animation and increase the animation frame by 1
             else {
-                $('img').attr('src', `assets/images/Run__00${animationCount}.png`);
-                animationCount++;
+                $('.runner').css('background-position-y', animationCount);
+                animationCount -= 275;
             }
 
             $('main').css('background-position-x', `${runCounter * -50}px`); //move the background 
@@ -38,17 +69,17 @@ function running() {
                 runCounter++; //increase run counter by 1
 
                 //checks what frame the character animation is at
-                //if the character animation reaches it's 9th frame, the counter resets back to 0 and the animation begins again
-                if (animationCount > 9) {
+                //if the character animation reaches it's 15th frame, the counter resets back to 0 and the animation begins again
+                if (animationCount < -3850) {
                     animationCount = 0; //reset animation counter to 0
-                    $('img').attr('src', `assets/images/Run__00${animationCount}.png`); //change the character animation
-                    animationCount++; //increase animation counter by 1
+                    $('.runner').css('background-position-y', animationCount);
+                    animationCount -= 275; //increase animation frame by 1
                 }
 
-                //show the next frame of the character animation and increase the animation counter by 1
+                //show the next frame of the character animation and increase the animation frame by 1
                 else {
-                    $('img').attr('src', `assets/images/Run__00${animationCount}.png`);
-                    animationCount++;
+                    $('.runner').css('background-position-y', animationCount);
+                    animationCount -= 275;
                 }
             }
 
@@ -107,11 +138,13 @@ function playSound() {
 
 //function resets the styles and counters
 function resetGame() {
-    $('button').toggleClass('visibility');
+    $('.startButton').toggleClass('visibility');
     $('.timer').toggleClass('visibility');
     $('.runner').css('visibility', 'hidden');
     $('.countdown').toggleClass('visibility');
     $('.your-time').css('display', 'none');
+    $('.submitTime').css('display', 'none');
+    $('.runner').css('width', `250px`)
     runCounter = 0;
     countdown = 3;
 }
@@ -130,11 +163,14 @@ function endGame() {
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         $('.runner').off('click');
     }
-    $('button').toggleClass('visibility');
-    $('button').text('Retry');
-    $('img').attr('src', `assets/images/Dead__009.png`);
+    $('.startButton').toggleClass('visibility');
+    $('.startButton').text('Retry');
+    $('.runner').css('background-image', `url("assets/images/Dead (14).png")`);
+    $('.runner').css('width', `300px`);
+    $('.runner').css('background-position-y', `0`);
     $('.your-time').css('display', 'block');
-
+    $('.submitTime').css('display', 'block');
+    finalTime = parseFloat($('.timer').text().replace('s', ''))
 }
 
 //function starts the game
@@ -163,6 +199,21 @@ function startGame() {
     }, 3500);
 }
 
+function submitTime() {
+    
+    if (/^\s*$/.test($('.username').val()) === false) {
+        swal("Your score has been submitted!")
+        $('.submitTime').css('display', 'none');
+        const dbRef = firebase.database().ref('users');
+        dbRef.update({
+            // [$('.username').val()]: parseFloat($('.timer').text().replace('s', ''))
+            [$('.username').val()]: finalTime
+        })
+    } else {
+        swal("You need to enter your name.")
+    }
+}
+
 //document ready
 $(function () {
 
@@ -173,15 +224,20 @@ $(function () {
     $('.title-screen').on('click', function () {
         $('.wrapper').toggleClass('visibility');
         $('.title-screen').css('display', 'none');
+        $('.leaderboard').css('display', 'block');
     });
 
-    //start game when button clicked
-    $('button').on('click', function () {
+    //start game when .startButton clicked
+    $('.startButton').on('click', function () {
         startGame();
     });
 
+    $('.submitButton').on('click', function() {
+        submitTime();
+    })
+
     //adjust text when user is on mobile
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        $('.timer').text('Tap on your character to run. Make him run 100m as fast as you can!');
+        $('.timer').text(`You're running late for class! Tap on your character to run. Make him run as fast as you can!`);
     }
 });

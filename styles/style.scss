@@ -4,11 +4,13 @@
 h1,
 h2,
 p,
-button {
+.startButton,
+.leaderboard {
     margin: 0;
     color: aliceblue;
     font-size: 1.5rem;
-    font-family: 'Stylish', sans-serif;
+    // font-family: 'Stylish', sans-serif;
+    font-family: 'Cabin', sans-serif;
     user-select: none;
 }
 
@@ -22,11 +24,12 @@ img {
     object-fit: contain;
 }
 
-button {
+.startButton {
     @include width-height(110px, 110px);
     border-radius: 50%;
     position: relative;
-    background: firebrick;
+    background: yellow;
+    color: red;
 }
 
 main,
@@ -38,10 +41,11 @@ main,
 
 main {
     @include width-height(auto, calc(100vh - 30px));
-    background-image: url(../assets/images/background.png);
+    background-image: url(../assets/images/20085203.jpg);
     background-size: cover;
-    background-position: bottom;
+    background-position: center;
     background-repeat: repeat-x;
+    position: relative;
 }
 
 footer {
@@ -68,7 +72,11 @@ h1,
 }
 
 .runner {
-    @include width-height(80%, 50vh);
+    @include width-height(200px, 250px);
+    background-image: url("../assets/images/Idle.png");
+    // background-image: url("../assets/images/Running-boy.png");
+    background-size: 300px;
+    background-repeat: no-repeat;
 }
 
 .countdown {
@@ -94,6 +102,36 @@ h1,
     background: rgba(35, 41, 44, 0.7);
     align-items: center;
     justify-content: center;
+    h1,
+    p {
+        color: aliceblue;
+    }
+}
+
+.countdown {
+    text-shadow: 2px 2px black;
+}
+
+.timer,
+.your-time {
+    background: rgba(0,0,0, 0.7);
+    padding: 5px 10px;
+    border-radius: 2px;
+}
+
+.submitTime {
+    display: none;
+    background: rgba(0,0,0, 0.7);
+    padding: 20px;
+}
+
+.leaderboard {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    background: rgba(0,0,0, 0.7);
+    padding: 20px;
 }
 
 //mobile styles

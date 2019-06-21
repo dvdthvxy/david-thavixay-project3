@@ -5,36 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Cabin&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
-    <title>Jungle Run</title>
+    <title>Running Late</title>
 </head>
 
 <body>
     <main>
         <div class="wrapper visibility">
             <!-- start button -->
-            <button aria-label="Button to begin game" tabindex="5">
+            <button class="startButton" aria-label="Button to begin game" tabindex="5">
                 <div>START</div>
             </button>
 
             <!-- game text -->
             <p class="countdown visibility" id="countdown">Press Start to begin</p>
             <p class="your-time" tabindex="3">Your time is:</p>
-            <h2 tabindex="4" class="timer">Alternate pressing the left and right arrow keys to get your character to run. Make him
-                run 100m as fast as you can!</h2>
+            <h2 tabindex="4" class="timer">You're about to be late for class! Alternate pressing the left and right arrow keys to get your character to run. Make him
+                run as fast as you can!</h2>
+            <div class="submitTime">
+                <input class="username" type="text" placeholder="NAME" maxlength="15">
+                <button class="submitButton">Submit Your Time</button>
+            </div>
 
             <!-- image of runner -->
             <div class="runner">
-                <img src="assets/images/Idle__000.png" alt="">
+                <!-- <img src="assets/images/Idle (1).png" alt=""> -->
             </div>
         </div>
 
         <!-- title screen -->
         <div class="title-screen">
-            <h1 tabindex="1">JUNGLE RUN</h1>
+            <h1 tabindex="1">RUNNING LATE</h1>
             <p tabindex="2" aria-label="Alternate pressing the left and right arrow keys to get your character to run. Make him
                 run 100 meters as fast as you can! Click to continue">Click to continue</p>
+        </div>
+        <div class="leaderboard">
+            <h2>LEADERBOARD</h2>
+            <div class="scores"></div>
         </div>
     </main>
     <footer>
@@ -43,8 +52,14 @@
 
     <audio src="assets/sounds/Mario Kart Race Start - Gaming Sound Effect.mp3"></audio>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script src='https://code.jquery.com/jquery-3.2.1.min.js'
         integrity='sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=' crossorigin='anonymous'></script>
+
     <script src="scripts/script.js"></script>
 </body>
 
