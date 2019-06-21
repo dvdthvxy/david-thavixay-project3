@@ -265,6 +265,9 @@ h1,
   .title-screen p {
     color: aliceblue; }
 
+.countdown {
+  text-shadow: 2px 2px black; }
+
 .timer,
 .your-time {
   background: rgba(0, 0, 0, 0.7);
