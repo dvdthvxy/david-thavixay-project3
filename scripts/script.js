@@ -195,7 +195,7 @@ function startGame() {
                 endGame();
                 stop(watcher);
             }
-        }, 10);
+        });
     }, 3500);
 }
 
