@@ -190,7 +190,7 @@ function startGame() {
         //function continously checks runCounter every 10th of a second
         let watcher = setInterval(function () {
             //end game when runCounter is 100
-            if (runCounter === 100) {
+            if (runCounter >= 100) {
                 stop(timer);
                 endGame();
                 stop(watcher);
