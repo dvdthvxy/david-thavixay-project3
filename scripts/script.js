@@ -33,7 +33,7 @@ dbRef.orderByValue().on("value", function (response) {
 
 
 //event listener for when the user presses a key
-function running() {
+function running(timer) {
     let animationCount = 0; //var keeps track of the character's animation frame
     let keyPressed = undefined; //var keeps track of the user's last key press
     $('.runner').css('background-image', `url("assets/images/Running-boy.png")`);
@@ -63,23 +63,27 @@ function running() {
     else {
         //event listener for key press created for desktop/laptop users
         $(window).keydown(function (e) {
-
             //checks the user's key press - the key press cannot be the last user's last key pressed and it has to be either the left or right arrow key
             if (e.keyCode !== keyPressed && (e.keyCode == 37 || e.keyCode == 39)) {
                 runCounter++; //increase run counter by 1
-
-                //checks what frame the character animation is at
-                //if the character animation reaches it's 15th frame, the counter resets back to 0 and the animation begins again
-                if (animationCount < -3850) {
-                    animationCount = 0; //reset animation counter to 0
-                    $('.runner').css('background-position-y', animationCount);
-                    animationCount -= 275; //increase animation frame by 1
-                }
-
-                //show the next frame of the character animation and increase the animation frame by 1
-                else {
-                    $('.runner').css('background-position-y', animationCount);
-                    animationCount -= 275;
+                //end game when runCounter is 100
+                if (runCounter >= 100) {
+                    stop(timer);
+                    endGame();
+                } else {
+                    //checks what frame the character animation is at
+                    //if the character animation reaches it's 15th frame, the counter resets back to 0 and the animation begins again
+                    if (animationCount < -3850) {
+                        animationCount = 0; //reset animation counter to 0
+                        $('.runner').css('background-position-y', animationCount);
+                        animationCount -= 275; //increase animation frame by 1
+                    }
+    
+                    //show the next frame of the character animation and increase the animation frame by 1
+                    else {
+                        $('.runner').css('background-position-y', animationCount);
+                        animationCount -= 275;
+                    }
                 }
             }
 
@@ -178,24 +182,14 @@ function startGame() {
     playSound(); //play the countdown music
     resetGame() //reset the styles and counters
     readySetGo(); //start intial countdown
-    let beginCountdown = setInterval(readySetGo, 1001); //run countdown again for every second
+    let beginCountdown = setInterval(readySetGo, 1000); //run countdown again for every second
 
     //delay start of game by 3.5secs
     setTimeout(function () {
+        let timer = stopWatch(); //create timer
         gameStyles(); //turn on game active styles
         stop(beginCountdown); //stop countdown
-        running(); //turn on keydown event listener
-        let timer = stopWatch(); //create timer
-
-        //function continously checks runCounter every 10th of a second
-        let watcher = setInterval(function () {
-            //end game when runCounter is 100
-            if (runCounter >= 100) {
-                stop(timer);
-                endGame();
-                stop(watcher);
-            }
-        });
+        running(timer); //turn on keydown event listener
     }, 3500);
 }
 
