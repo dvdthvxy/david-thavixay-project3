@@ -21,7 +21,7 @@ dbRef.orderByValue().on("value", function (response) {
     $('.scores').empty()
 
     let leaderboardLimit = 0
-    response.forEach( data => {
+    response.forEach(data => {
         leaderboardLimit++
         if (leaderboardLimit > 5) {
             return
@@ -43,18 +43,23 @@ function running(timer) {
         $('.runner').on('click', function () {
             runCounter++; //increase run counter by 1
 
-            //checks what frame the character animation is at
-            //if the character animation reaches it's 15th frame, the counter resets back to 0 and the animation begins again
-            if (animationCount < -3850) {
-                animationCount = 0; //reset animation counter to 0
-                $('.runner').css('background-position-y', animationCount);
-                animationCount -= 275; //increase animation frame by 1
-            }
+            if (runCounter >= 100) {
+                stop(timer);
+                endGame();
+            } else {
+                //checks what frame the character animation is at
+                //if the character animation reaches it's 15th frame, the counter resets back to 0 and the animation begins again
+                if (animationCount < -3850) {
+                    animationCount = 0; //reset animation counter to 0
+                    $('.runner').css('background-position-y', animationCount);
+                    animationCount -= 275; //increase animation frame by 1
+                }
 
-            //show the next frame of the character animation and increase the animation frame by 1
-            else {
-                $('.runner').css('background-position-y', animationCount);
-                animationCount -= 275;
+                //show the next frame of the character animation and increase the animation frame by 1
+                else {
+                    $('.runner').css('background-position-y', animationCount);
+                    animationCount -= 275;
+                }
             }
 
             $('main').css('background-position-x', `${runCounter * -50}px`); //move the background 
@@ -78,7 +83,7 @@ function running(timer) {
                         $('.runner').css('background-position-y', animationCount);
                         animationCount -= 275; //increase animation frame by 1
                     }
-    
+
                     //show the next frame of the character animation and increase the animation frame by 1
                     else {
                         $('.runner').css('background-position-y', animationCount);
@@ -194,7 +199,7 @@ function startGame() {
 }
 
 function submitTime() {
-    
+
     if (/^\s*$/.test($('.username').val()) === false) {
         swal("Your score has been submitted!")
         $('.submitTime').css('display', 'none');
@@ -226,12 +231,13 @@ $(function () {
         startGame();
     });
 
-    $('.submitButton').on('click', function() {
+    $('.submitButton').on('click', function () {
         submitTime();
     })
 
     //adjust text when user is on mobile
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         $('.timer').text(`You're running late for class! Tap on your character to run. Make him run as fast as you can!`);
+        $('.leaderboard').toggleClass('visibility');
     }
 });
